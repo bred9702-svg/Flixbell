@@ -437,15 +437,15 @@ const FEATURED = [
   { badge:"Nouveau 2026", kicker:"Dernière sortie", titre:"Torsion de l'Intrigue",
     pill:"Le tout nouveau drame", meta:["Tout public","2026","Drame · Série","Épisode 1"],
     syn:"Quand chaque vérité en cache une autre, l'intrigue se resserre. La toute nouvelle série signée Bellevue Kandy.",
-    video:"Torsion-de-l'intringue", img:"", grad:"linear-gradient(120deg,#2a1a12,#3a1d14 38%,#160f0c)", glow:"rgba(227,80,43,.42)" },
+    video:"Torsion-de-l'intringue", img:"https://img.youtube.com/vi/7gPptXi9O_I/maxresdefault.jpg", grad:"linear-gradient(120deg,#2a1a12,#3a1d14 38%,#160f0c)", glow:"rgba(227,80,43,.42)" },
   { badge:"Nouveau 2026", kicker:"Série événement", titre:"Drame de la Séparation",
     pill:"La série qui bouleverse Kinshasa", meta:["Tout public","2026","Drame · Série","Épisode 1"],
     syn:"Une famille déchirée, des liens mis à l'épreuve : le drame qui tient tout Kinshasa en haleine.",
-    video:"drame-separation", img:"", grad:"linear-gradient(120deg,#3a1340,#8a2b6b 50%,#150c18)", glow:"rgba(138,43,107,.42)" },
+    video:"drame-separation", img:"https://img.youtube.com/vi/CBv-sQ7QYRA/maxresdefault.jpg", grad:"linear-gradient(120deg,#3a1340,#8a2b6b 50%,#150c18)", glow:"rgba(138,43,107,.42)" },
   { badge:"Nouveau 2026", kicker:"Nouvelle série", titre:"L'Uchronie",
     pill:"Et si tout s'était passé autrement ?", meta:["Tout public","2026","Drame · Série","Épisode 1"],
     syn:"Une fiction audacieuse qui réécrit le destin. La nouveauté qui surprend, signée Bellevue Kandy.",
-    video:"uchronie", img:"", grad:"linear-gradient(120deg,#123a44,#0f2e34 42%,#0d0c14)", glow:"rgba(31,125,114,.42)" },
+    video:"uchronie", img:"https://img.youtube.com/vi/8h9r8ugtk7M/maxresdefault.jpg", grad:"linear-gradient(120deg,#123a44,#0f2e34 42%,#0d0c14)", glow:"rgba(31,125,114,.42)" },
 ];
 
 const stage=document.getElementById('heroStage');
@@ -453,7 +453,7 @@ const dotsEl=document.getElementById('heroDots');
 const soundBtn=document.getElementById('heroSound');
 stage.innerHTML=FEATURED.map(s=>`
   <div class="hero-slide">
-    <div class="slide-bg" style="${s.img?`background-image:url('${s.img}');`:`background:${s.grad};`}--glow:${s.glow}"></div>
+    <div class="slide-bg" style="background:${s.img?`url('${s.img}') center top/cover, `:''}${s.grad};--glow:${s.glow}"></div>
     <div class="slide-video" data-src="${s.video||''}"></div>
     <div class="slide-scrim"></div>
     <div class="hero-inner">
