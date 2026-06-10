@@ -156,7 +156,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* aperçu vidéo (bande-annonce) */
 .slide-video{position:absolute;inset:0;z-index:0;overflow:hidden;opacity:0;transition:opacity 1s ease;pointer-events:none;background:transparent}
 .slide-video.on{opacity:1}
-.slide-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.slide-video iframe,.slide-video video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-width:177.78vh;min-height:100vh;border:0;object-fit:cover;pointer-events:none}
 .hero-sound{position:absolute;z-index:6;bottom:27px;right:var(--pad);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--cream);background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);cursor:pointer;transition:.2s}
 .hero-sound:hover{background:rgba(0,0,0,.62)}
 .hero-sound svg{width:20px;height:20px}
@@ -429,22 +429,23 @@ document.querySelectorAll('.track-wrap').forEach(w=>{
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled', scrollY>40));
 /* ===== BANNIÈRE : carrousel + aperçu vidéo (style Netflix) =====
-   Aperçu via des fichiers vidéo HÉBERGÉS AVEC LE SITE (le plus fiable).
-   video : le nom du fichier .mp4 placé dans le dépôt (à la racine).
+   Les 3 derniers films de Bellevue TV, en fichiers vidéo HÉBERGÉS AVEC LE SITE.
+   video : le nom du fichier SANS extension. Dépose dans le dépôt soit
+   "nom.mp4" soit "nom.webm" — le site prend automatiquement celui qui existe.
    Laisse "" pour n'afficher que le dégradé. */
 const FEATURED = [
-  { badge:"Nouveau", kicker:"Série événement", titre:"Sous le Drapeau",
-    pill:"TOP 1 cette semaine", meta:["Tout public","2024","Drame · Série","Réal. Tommy Mukondolo"],
-    syn:"Quand une femme accepte enfin ses fragilités, elle y découvre une force insoupçonnée. La nouvelle série événement de Flixbelle.",
-    video:"sous-le-drapeau.mp4", img:"", grad:"linear-gradient(120deg,#2a1a12,#3a1d14 38%,#160f0c)", glow:"rgba(227,80,43,.42)" },
-  { badge:"Comédie", kicker:"Pièce culte", titre:"Tartuffe",
-    pill:"Molière, version Kinshasa", meta:["Tout public","2024","Comédie · Théâtre","Réal. Caleb Kongo"],
-    syn:"L'imposteur le plus drôle de la scène débarque chez vous : une relecture savoureuse du classique de Molière, à la sauce congolaise.",
-    video:"tartuffe.mp4", img:"", grad:"linear-gradient(120deg,#2a123a,#3a1340 45%,#150c18)", glow:"rgba(138,43,107,.42)" },
-  { badge:"Nouveau", kicker:"Drame", titre:"Torgnole",
-    pill:"L'histoire qui fait parler", meta:["Tout public","2024","Drame · Série","Réal. Caleb Kongo"],
-    syn:"Entre espoirs et craintes, une plongée intense dans les zones secrètes de l'âme. Un drame signé Bellevue Kandy.",
-    video:"torgnole.mp4", img:"", grad:"linear-gradient(120deg,#123a44,#0f2e34 42%,#0d0c14)", glow:"rgba(31,125,114,.42)" },
+  { badge:"Nouveau 2026", kicker:"Dernière sortie", titre:"Torsion de l'Intrigue",
+    pill:"Le tout nouveau drame", meta:["Tout public","2026","Drame · Série","Épisode 1"],
+    syn:"Quand chaque vérité en cache une autre, l'intrigue se resserre. La toute nouvelle série signée Bellevue Kandy.",
+    video:"Torsion-de-l'intringue", img:"", grad:"linear-gradient(120deg,#2a1a12,#3a1d14 38%,#160f0c)", glow:"rgba(227,80,43,.42)" },
+  { badge:"Nouveau 2026", kicker:"Série événement", titre:"Drame de la Séparation",
+    pill:"La série qui bouleverse Kinshasa", meta:["Tout public","2026","Drame · Série","Épisode 1"],
+    syn:"Une famille déchirée, des liens mis à l'épreuve : le drame qui tient tout Kinshasa en haleine.",
+    video:"drame-separation", img:"", grad:"linear-gradient(120deg,#3a1340,#8a2b6b 50%,#150c18)", glow:"rgba(138,43,107,.42)" },
+  { badge:"Nouveau 2026", kicker:"Nouvelle série", titre:"L'Uchronie",
+    pill:"Et si tout s'était passé autrement ?", meta:["Tout public","2026","Drame · Série","Épisode 1"],
+    syn:"Une fiction audacieuse qui réécrit le destin. La nouveauté qui surprend, signée Bellevue Kandy.",
+    video:"uchronie", img:"", grad:"linear-gradient(120deg,#123a44,#0f2e34 42%,#0d0c14)", glow:"rgba(31,125,114,.42)" },
 ];
 
 const stage=document.getElementById('heroStage');
@@ -479,12 +480,12 @@ function refreshSound(){ soundBtn.innerHTML = muted?ICON_MUTED:ICON_SOUND; sound
 function clearVideos(){ slides.forEach(s=>{const v=s.querySelector('.slide-video'); v.classList.remove('on'); v.innerHTML='';}); }
 function playVideo(slide){
   if(reduce) return;
-  const box=slide.querySelector('.slide-video'); const src=box&&box.dataset.src; if(!src) return;
-  box.innerHTML=`<video src="${src}" loop playsinline preload="auto"></video>`;
+  const box=slide.querySelector('.slide-video'); const base=box&&box.dataset.src; if(!base) return;
+  box.innerHTML=`<video loop playsinline preload="auto"><source src="${base}.mp4" type="video/mp4"><source src="${base}.webm" type="video/webm"></video>`;
   const vid=box.querySelector('video');
   vid.muted=muted;
-  vid.addEventListener('playing',()=>box.classList.add('on'),{once:true});
-  vid.addEventListener('error',()=>box.classList.remove('on'));   // fichier absent -> on garde le dégradé
+  vid.addEventListener('playing',()=>box.classList.add('on'),{once:true}); // n'affiche QUE si ça joue vraiment
+  vid.addEventListener('error',()=>{box.classList.remove('on');},true);     // sinon on garde le dégradé
   vid.play && vid.play().catch(()=>{});
 }
 function show(i){
