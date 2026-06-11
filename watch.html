@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flixbelle — Lecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0E0B0A;--gold:#E8B04B;--ember:#E3502B;--cream:#F6EFE3;--line:rgba(246,239,227,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--cream);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid var(--line)}
+.back{display:flex;align-items:center;gap:8px;color:var(--cream);text-decoration:none;font-weight:600;font-size:15px}
+.brand{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;color:var(--gold);display:flex;align-items:center;gap:8px}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--ember)}
+
+.player{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;background:#000}
+.player-inner{width:100%;max-width:1100px;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+video,iframe{width:100%;height:100%;display:block;border:none}
+
+.fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;background:linear-gradient(155deg,#1d2a52,#2f5fb0)}
+.fallback h3{font-family:'Bricolage Grotesque',sans-serif;font-size:22px}
+.fallback p{opacity:.85;font-size:14px;max-width:380px}
+
+.info{padding:18px 28px 30px;max-width:1100px;margin:0 auto;width:100%}
+.info h1{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;margin-bottom:6px}
+.info p{opacity:.7;font-size:14px}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="back" id="backLink" href="index.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> Retour</a>
+  <div class="brand"><span class="dot"></span> Flixbelle</div>
+</nav>
+
+<div class="player">
+  <div class="player-inner" id="playerInner"></div>
+</div>
+
+<div class="info">
+  <h1 id="titre">…</h1>
+  <p id="sub"></p>
+</div>
+
+<script src="films-data.js"></script>
+<script>
+const params=new URLSearchParams(location.search);
+const id=params.get('id');
+const f=findFilm(id);
+const inner=document.getElementById('playerInner');
+
+if(!f){
+  document.getElementById('titre').textContent="Vidéo introuvable";
+  document.getElementById('sub').textContent="Retourne au catalogue et choisis un titre.";
+  inner.innerHTML=`<div class="fallback"><h3>Titre introuvable</h3><p>Cette vidéo n'existe pas dans le catalogue de démonstration.</p></div>`;
+}else{
+  document.title="Flixbelle — "+f.t;
+  document.getElementById('titre').textContent=f.t;
+  document.getElementById('sub').textContent=(f.genre||'')+(f.an?(' · '+f.an):'')+' · Bellevue Kandy';
+  document.getElementById('backLink').href='detail.html?id='+encodeURIComponent(f.id);
+
+  if(f.file){
+    // Vidéo locale uploadée par Bred (nom = titre du film, .mp4 ou .webm)
+    const base=encodeURIComponent(f.file);
+    inner.innerHTML=`<video controls autoplay playsinline poster="https://i.ytimg.com/vi/${f.yt||''}/maxresdefault.jpg">
+      <source src="${base}.mp4" type="video/mp4">
+      <source src="${base}.webm" type="video/webm">
+    </video>`;
+    const v=inner.querySelector('video');
+    v.addEventListener('error',showFallback,true);
+    // si aucune source ne charge
+    let loaded=false;
+    v.addEventListener('loadeddata',()=>loaded=true);
+    setTimeout(()=>{ if(!loaded) showFallback(); },4000);
+  } else if(f.yt){
+    inner.innerHTML=`<iframe src="https://www.youtube.com/embed/${f.yt}?autoplay=1" title="${f.t}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  } else {
+    showFallback();
+  }
+}
+
+function showFallback(){
+  inner.innerHTML=`<div class="fallback"><h3>Vidéo bientôt disponible</h3><p>L'épisode 1 de « ${f.t} » sera ajouté prochainement à la démo Flixbelle.</p></div>`;
+}
+</script>
+</body>
+</html>
