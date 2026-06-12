@@ -34,3 +34,267 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--ember);box-shadow:0 0 14px var(--ember)}
 .brand-logo{height:40px;width:auto;display:block}
 .foot-brand .brand-logo{height:52px}
+.brand-text{display:inline-flex;align-items:center;gap:9px}
+.nav-links{display:flex;gap:26px;margin-left:14px}
+.nav-links a{font-size:14.5px;color:var(--sand);font-weight:500;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--cream)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:18px}
+.icon-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--sand);transition:.2s}
+.icon-btn:hover{color:var(--cream);background:rgba(255,255,255,.06)}
+.avatar{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--ember));display:grid;place-items:center;font-weight:700;color:var(--ink);font-size:14px}
+.burger{display:none}
+
+.hero{position:relative;min-height:92vh;overflow:hidden}
+.hero-stage{position:absolute;inset:0}
+.hero-slide{position:absolute;inset:0;display:flex;align-items:flex-end;padding:0 var(--pad) clamp(48px,7vw,96px);opacity:0;transition:opacity .9s ease;pointer-events:none}
+.hero-slide.active{opacity:1;pointer-events:auto;z-index:2}
+.slide-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center top}
+.slide-bg::after{content:"";position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(60% 70% at 72% 30%, var(--glow,rgba(255,225,170,.25)), transparent 60%)}
+.hero-slide.active .slide-bg{animation:ken 9s ease-out both}
+.slide-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg, var(--ink) 8%, rgba(14,11,10,.55) 46%, transparent 72%),linear-gradient(0deg, var(--ink) 4%, transparent 42%)}
+.hero-grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-inner{position:relative;z-index:3;max-width:640px}
+.hero .kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.22em;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.hero .kicker .badge{background:var(--ember);color:#fff;padding:4px 9px;border-radius:5px;letter-spacing:.12em}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(44px,7vw,82px);line-height:.96;letter-spacing:-.02em;margin-bottom:18px}
+.hero .meta{display:flex;gap:12px;align-items:center;color:var(--sand);font-size:14.5px;font-weight:500;margin-bottom:18px;flex-wrap:wrap}
+.hero .meta .pill{border:1px solid var(--line);padding:3px 10px;border-radius:20px;color:var(--gold-soft)}
+.hero p.syn{color:var(--cream);opacity:.86;font-size:16.5px;max-width:540px;margin-bottom:30px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:10px;font-weight:600;font-size:16px;transition:transform .15s, box-shadow .2s, background .2s}
+.btn:active{transform:scale(.97)}
+.btn-play{background:var(--ember);color:#fff;box-shadow:0 8px 30px rgba(227,80,43,.4)}
+.btn-play:hover{background:#f15c34}
+.btn-ghost{background:rgba(246,239,227,.12);color:var(--cream);backdrop-filter:blur(6px);border:1px solid rgba(246,239,227,.2)}
+.btn-ghost:hover{background:rgba(246,239,227,.2)}
+.hero-dots{position:absolute;z-index:6;bottom:32px;right:calc(var(--pad) + 60px);display:flex;gap:8px}
+.hero-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:.35s;border:none;padding:0}
+.hero-dot.on{background:var(--gold);width:26px;border-radius:6px}
+.hero-arrow{position:absolute;z-index:6;top:0;bottom:120px;width:7%;display:none;align-items:center;justify-content:center;color:var(--cream);opacity:0;transition:opacity .25s;background:none}
+.hero-arrow svg{width:34px;height:34px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
+.hero-arrow.left{left:0}.hero-arrow.right{right:0}
+.hero:hover .hero-arrow{opacity:.6}
+.hero-arrow:hover{opacity:1!important}
+.slide-video{position:absolute;inset:0;z-index:0;overflow:hidden;opacity:0;transition:opacity 1s ease;pointer-events:none;background:transparent}
+.slide-video.on{opacity:1}
+.slide-video iframe,.slide-video video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-width:177.78vh;min-height:100vh;border:0;object-fit:cover;pointer-events:none}
+.hero-sound{position:absolute;z-index:6;bottom:27px;right:var(--pad);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--cream);background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);cursor:pointer;transition:.2s}
+.hero-sound:hover{background:rgba(0,0,0,.62)}
+.hero-sound svg{width:20px;height:20px}
+@keyframes ken{from{transform:scale(1.001)}to{transform:scale(1.09)}}
+
+.rows{position:relative;z-index:3;margin-top:-40px;padding-bottom:60px}
+.row{margin:38px 0}
+.row-head{display:flex;align-items:baseline;gap:14px;padding:0 var(--pad);margin-bottom:16px}
+.row-head h2{font-family:var(--font-display);font-weight:600;font-size:clamp(20px,2.4vw,27px);letter-spacing:-.01em}
+.row-head .see{margin-left:auto;font-size:13px;color:var(--gold);font-weight:600;opacity:0;transition:.2s;letter-spacing:.04em}
+.row:hover .see{opacity:1}
+.track-wrap{position:relative}
+.track{display:flex;gap:16px;overflow-x:auto;scroll-behavior:smooth;padding:6px var(--pad) 18px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.card{position:relative;flex:0 0 auto;width:200px;height:300px;border-radius:14px;overflow:hidden;scroll-snap-align:start;background:var(--ink-3);transition:transform .28s cubic-bezier(.2,.7,.3,1), box-shadow .28s;cursor:pointer;border:1px solid rgba(255,255,255,.05)}
+.card:hover{transform:translateY(-8px) scale(1.04);box-shadow:0 24px 50px rgba(0,0,0,.6);z-index:5}
+.card .poster{position:absolute;inset:0}
+.poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.card .poster::after{content:"";position:absolute;inset:0;opacity:.10;background:repeating-linear-gradient(60deg, #000 0 2px, transparent 2px 9px)}
+.card .top{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:flex-start}
+.card .genre{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.9);background:rgba(0,0,0,.28);padding:4px 8px;border-radius:6px;backdrop-filter:blur(4px)}
+.card .flag{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--ink);background:var(--gold);padding:4px 7px;border-radius:6px}
+.card .bottom{position:absolute;left:0;right:0;bottom:0;padding:60px 14px 14px;background:linear-gradient(0deg, rgba(8,5,4,.98) 0%, rgba(8,5,4,.88) 28%, rgba(8,5,4,.35) 58%, transparent)}
+.card .title{font-family:var(--font-display);font-weight:600;font-size:18px;line-height:1.04;margin-bottom:6px}
+.card .sub{font-size:12px;color:var(--sand);display:flex;gap:8px;align-items:center}
+.card .hover-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(8,5,4,.4);opacity:0;transition:.25s}
+.card:hover .hover-play{opacity:1}
+.card .play-c{width:54px;height:54px;border-radius:50%;background:var(--cream);display:grid;place-items:center;color:var(--ink);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.card.ranked{display:flex;align-items:flex-end;width:240px;background:none;border:none}
+.card.ranked .rank{font-family:var(--font-display);font-weight:800;font-size:150px;line-height:.7;color:transparent;-webkit-text-stroke:2.5px var(--gold);margin-right:-22px;margin-bottom:-6px;flex:0 0 auto;opacity:.92}
+.card.ranked .mini{position:relative;width:160px;height:240px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:transform .28s}
+.card.ranked:hover{transform:none}
+.card.ranked:hover .mini{transform:translateY(-8px) scale(1.04);box-shadow:0 22px 46px rgba(0,0,0,.6)}
+.card.ranked .mini .poster::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,5,4,.97) 6%,rgba(8,5,4,.45) 42%,transparent 62%)}
+.card.ranked .mini .t{position:absolute;left:12px;right:12px;bottom:12px;font-family:var(--font-display);font-weight:600;font-size:15px;z-index:2}
+.arrow{position:absolute;top:6px;bottom:30px;width:54px;z-index:8;display:none;align-items:center;justify-content:center;color:var(--cream);background:linear-gradient(90deg, rgba(14,11,10,.92), transparent);opacity:0;transition:opacity .2s;border:none}
+.arrow.right{right:0;background:linear-gradient(270deg, rgba(14,11,10,.92), transparent)}
+.arrow svg{width:30px;height:30px}
+.track-wrap:hover .arrow{opacity:1}
+
+footer{border-top:1px solid var(--line);padding:48px var(--pad) 60px;color:var(--muted);font-size:13.5px}
+.foot-top{display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;margin-bottom:34px}
+.foot-cols{display:flex;flex-wrap:wrap;gap:54px}
+.foot-col h4{color:var(--cream);font-size:13px;letter-spacing:.04em;margin-bottom:14px;font-weight:600}
+.foot-col a{display:block;color:var(--muted);margin-bottom:9px;transition:.2s}
+.foot-col a:hover{color:var(--gold)}
+.foot-brand{max-width:280px}
+.foot-brand .brand{font-size:22px;margin-bottom:12px}
+.foot-brand p{color:var(--muted);font-size:13.5px}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)}
+.foot-bottom .made{color:var(--gold);font-weight:600}
+
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero-slide.active .hero-inner>*{animation:rise .7s both}
+.hero-slide.active .kicker{animation-delay:.05s}
+.hero-slide.active h1{animation-delay:.13s}
+.hero-slide.active .meta{animation-delay:.22s}
+.hero-slide.active p.syn{animation-delay:.3s}
+.hero-slide.active .hero-actions{animation-delay:.38s}
+
+@media (min-width:900px){ .arrow{display:flex} .hero-arrow{display:flex} }
+@media (max-width:820px){
+  .nav-links{display:none}
+  .burger{display:grid}
+  .brand{font-size:22px}
+  .hero{min-height:84vh}
+  .card{width:150px;height:226px}
+  .card .title{font-size:15.5px}
+  .card.ranked{width:190px}
+  .card.ranked .rank{font-size:110px;margin-right:-16px}
+  .card.ranked .mini{width:124px;height:186px}
+  .btn{padding:13px 22px;font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="brand">
+    <img class="brand-logo" src="Logo.png" alt="Flixbelle" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logo.png';}else{this.remove();document.getElementById('brandTextNav').style.display='inline-flex';}">
+    <span class="brand-text" id="brandTextNav" style="display:none"><span class="dot"></span>Flixbelle</span>
+  </div>
+  <div class="nav-links">
+    <a class="active" href="#">Accueil</a>
+    <a href="#">Théâtre</a>
+    <a href="#">Films</a>
+    <a href="#">Séries</a>
+    <a href="#">Nouveautés</a>
+  </div>
+  <div class="nav-right">
+    <button class="icon-btn" aria-label="Rechercher">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    </button>
+    <button class="icon-btn burger" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="avatar">F</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-stage" id="heroStage"></div>
+  <div class="hero-grain"></div>
+  <button class="hero-arrow left" id="heroPrev" aria-label="Vedette précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="hero-arrow right" id="heroNext" aria-label="Vedette suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+  <div class="hero-dots" id="heroDots"></div>
+  <button class="hero-sound" id="heroSound" aria-label="Activer le son"></button>
+</header>
+
+<div class="wax"></div>
+<main class="rows" id="rows"></main>
+<div class="wax"></div>
+
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <div class="brand">
+        <img class="brand-logo" src="Logo.png" alt="Flixbelle" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logo.png';}else{this.remove();document.getElementById('brandTextFoot').style.display='inline-flex';}">
+        <span class="brand-text" id="brandTextFoot" style="display:none"><span class="dot"></span>Flixbelle</span>
+      </div>
+      <p>La maison du théâtre et du cinéma congolais. Le meilleur de la scène de Kinshasa, partout dans le monde.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col"><h4>Découvrir</h4><a href="#">Théâtre</a><a href="#">Films</a><a href="#">Séries</a><a href="#">Nouveautés</a></div>
+      <div class="foot-col"><h4>Compte</h4><a href="#">Mon profil</a><a href="#">Ma liste</a><a href="#">Abonnement</a></div>
+      <div class="foot-col"><h4>Aide</h4><a href="#">Contact</a><a href="#">Conditions</a><a href="#">Confidentialité</a></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 Flixbelle. Tous droits réservés.</span>
+    <span class="made">Fait à Kinshasa 🇨🇩</span>
+  </div>
+</footer>
+
+<script src="films-data.js"></script>
+  <script>
+
+function posterHTML(f){const grad=PALETTES[f.g||0];const img=f.yt?`<img class="poster-img" src="https://i.ytimg.com/vi/${f.yt}/mqdefault.jpg" data-id="${f.yt}" alt="" loading="lazy">`:'';return `<div class="poster" style="background:${grad}">${img}</div>`;}
+function cardHTML(f){const open=f.id?` onclick="location.href='detail.html?id=${f.id}'"`:'';return `<article class="card" tabindex="0"${open}>${posterHTML(f)}<div class="top"><span class="genre">${f.genre}</span>${f.neuf?'<span class="flag">NOUVEAU</span>':''}</div><div class="hover-play"><div class="play-c"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div><div class="bottom"><div class="title">${f.t}</div><div class="sub">${f.an?`<span>${f.an}</span>`:''}${f.d?`<span>· ${f.d}</span>`:''}</div></div></article>`;}
+function rankedHTML(f,i){const open=f.id?` onclick="location.href='detail.html?id=${f.id}'"`:'';return `<article class="card ranked" tabindex="0"${open}><div class="rank">${i+1}</div><div class="mini">${posterHTML(f)}<div class="t">${f.t}</div></div></article>`;}
+
+const rowsEl=document.getElementById('rows');
+ROWS.forEach(row=>{
+  const cards=row.films.map((f,i)=> row.classe?rankedHTML(f,i):cardHTML(f)).join('');
+  rowsEl.insertAdjacentHTML('beforeend',`<section class="row"><div class="row-head"><h2>${row.titre}</h2><span class="see">Tout voir ›</span></div><div class="track-wrap"><button class="arrow left" aria-label="Précédent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><div class="track">${cards}</div><button class="arrow right" aria-label="Suivant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div></section>`);
+});
+/* Montée en HD : on tente maxresdefault, on remplace seulement si la vraie HD existe (largeur > 320 = pas le placeholder gris 120px de YouTube). */
+document.querySelectorAll('.poster-img[data-id]').forEach(im=>{
+  const hi=new Image();
+  hi.onload=()=>{ if(hi.naturalWidth>320) im.src=hi.src; };
+  hi.src='https://i.ytimg.com/vi/'+im.dataset.id+'/maxresdefault.jpg';
+});
+document.querySelectorAll('.track-wrap').forEach(w=>{const track=w.querySelector('.track');w.querySelector('.left').onclick=()=>track.scrollBy({left:-track.clientWidth*0.8,behavior:'smooth'});w.querySelector('.right').onclick=()=>track.scrollBy({left:track.clientWidth*0.8,behavior:'smooth'});});
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+/* ===== BANNIÈRE : carrousel + aperçu vidéo =====
+   video : nom du fichier SANS extension (le site essaie .mp4 puis .webm). */
+const FEATURED=[
+  { badge:"Nouveau 2026", kicker:"Dernière sortie", titre:"Torsion de l'Intrigue",
+    pill:"Le tout nouveau drame", meta:["Tout public","2026","Drame · Série","Épisode 1"],
+    syn:"Quand chaque vérité en cache une autre, l'intrigue se resserre. La toute nouvelle série signée Bellevue Kandy.",
+    video:"Torsion-de-l'intringue", img:"https://img.youtube.com/vi/7gPptXi9O_I/maxresdefault.jpg", grad:"linear-gradient(120deg,#2a1a12,#3a1d14 38%,#160f0c)", glow:"rgba(227,80,43,.42)" },
+  { badge:"Nouveau 2026", kicker:"Série événement", titre:"Drame de la Séparation",
+    pill:"La série qui bouleverse Kinshasa", meta:["Tout public","2026","Drame · Série","Épisode 1"],
+    syn:"Une famille déchirée, des liens mis à l'épreuve : le drame qui tient tout Kinshasa en haleine.",
+    video:"drame-separation", img:"https://img.youtube.com/vi/CBv-sQ7QYRA/maxresdefault.jpg", grad:"linear-gradient(120deg,#3a1340,#8a2b6b 50%,#150c18)", glow:"rgba(138,43,107,.42)" },
+  { badge:"Nouveau 2026", kicker:"Nouvelle série", titre:"L'Uchronie",
+    pill:"Et si tout s'était passé autrement ?", meta:["Tout public","2026","Drame · Série","Épisode 1"],
+    syn:"Une fiction audacieuse qui réécrit le destin. La nouveauté qui surprend, signée Bellevue Kandy.",
+    video:"uchronie", img:"https://img.youtube.com/vi/8h9r8ugtk7M/maxresdefault.jpg", grad:"linear-gradient(120deg,#123a44,#0f2e34 42%,#0d0c14)", glow:"rgba(31,125,114,.42)" },
+];
+
+const stage=document.getElementById('heroStage');
+const dotsEl=document.getElementById('heroDots');
+const soundBtn=document.getElementById('heroSound');
+stage.innerHTML=FEATURED.map(s=>`<div class="hero-slide"><div class="slide-bg" style="background:${s.img?`url('${s.img}') center top/cover, `:''}${s.grad};--glow:${s.glow}"></div><div class="slide-video" data-src="${s.video||''}"></div><div class="slide-scrim"></div><div class="hero-inner"><span class="kicker"><span class="badge">${s.badge}</span> ${s.kicker}</span><h1>${s.titre}</h1><div class="meta"><span class="pill">${s.pill}</span>${s.meta.map((m,i)=>`${i?'<span>·</span>':''}<span>${m}</span>`).join('')}</div><p class="syn">${s.syn}</p><div class="hero-actions"><button class="btn btn-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Lire</button><button class="btn btn-ghost"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg> Plus d'infos</button></div></div></div>`).join('');
+dotsEl.innerHTML=FEATURED.map((_,i)=>`<button class="hero-dot" aria-label="Vedette ${i+1}"></button>`).join('');
+
+const slides=[...stage.children], dots=[...dotsEl.children];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let cur=0, timer=null, videoTimer=null, muted=true;
+const ICON_MUTED='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg>';
+const ICON_SOUND='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>';
+function refreshSound(){ soundBtn.innerHTML=muted?ICON_MUTED:ICON_SOUND; soundBtn.setAttribute('aria-label',muted?'Activer le son':'Couper le son'); }
+function clearVideos(){ slides.forEach(s=>{const v=s.querySelector('.slide-video');v.classList.remove('on');v.innerHTML='';}); }
+function playVideo(slide){
+  if(reduce) return;
+  const box=slide.querySelector('.slide-video'); const base=box&&box.dataset.src; if(!base) return;
+  box.innerHTML=`<video loop playsinline preload="auto"><source src="${base}.mp4" type="video/mp4"><source src="${base}.webm" type="video/webm"></video>`;
+  const vid=box.querySelector('video');
+  vid.muted=muted;
+  vid.addEventListener('playing',()=>box.classList.add('on'),{once:true});
+  vid.addEventListener('error',()=>{box.classList.remove('on');},true);
+  vid.play && vid.play().catch(()=>{});
+}
+function show(i){
+  cur=(i+slides.length)%slides.length;
+  slides.forEach((s,n)=>s.classList.toggle('active',n===cur));
+  dots.forEach((d,n)=>d.classList.toggle('on',n===cur));
+  clearVideos(); clearTimeout(videoTimer);
+  const active=slides[cur];
+  videoTimer=setTimeout(()=>{ if(slides[cur]===active) playVideo(active); },3000);
+}
+function start(){ if(!reduce && !timer) timer=setInterval(()=>show(cur+1),13000); }
+function stop(){ clearInterval(timer); timer=null; }
+dots.forEach((d,i)=>d.onclick=()=>{show(i);stop();start();});
+document.getElementById('heroPrev').onclick=()=>{show(cur-1);stop();start();};
+document.getElementById('heroNext').onclick=()=>{show(cur+1);stop();start();};
+soundBtn.onclick=()=>{ muted=!muted; refreshSound(); clearTimeout(videoTimer); playVideo(slides[cur]); };
+const heroEl=document.getElementById('hero');
+heroEl.addEventListener('mouseenter',stop); heroEl.addEventListener('mouseleave',start);
+heroEl.addEventListener('focusin',stop); heroEl.addEventListener('focusout',start);
+refreshSound(); show(0); start();
+</script>
+</body>
+</html>
