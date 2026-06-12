@@ -67,6 +67,7 @@ if(!f){
     inner.innerHTML=`<video controls autoplay playsinline poster="https://i.ytimg.com/vi/${f.yt||''}/maxresdefault.jpg">
       <source src="${base}.mp4" type="video/mp4">
       <source src="${base}.webm" type="video/webm">
+      <source src="${base}.mov" type="video/quicktime">
     </video>`;
     const v=inner.querySelector('video');
     v.addEventListener('error',showFallback,true);
